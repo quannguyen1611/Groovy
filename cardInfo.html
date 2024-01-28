@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Groovy</title>
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-wd9SddxKHW6q5WO3KCL5HpI8vaMG6CAdJzokWzoZBAe+MMydMRe2xLU3ElI4tNqB" crossorigin="anonymous">
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+            body{
+                margin: 0;
+                font-family: 'Raleway', sans-serif;
+                color:rgb(48, 46, 46);
+                width: 100%;
+            }
+            .whole {
+                padding-top: 60px;
+            }
+            /* Header and Navigation Bar */
+            header{
+                display: flex;
+                padding: 20px;
+                background-color:white;
+                border-radius: 90px;
+                border: 1px solid black;
+                width: 1130px;
+                height: 100px;
+                margin: 0 auto;
+                align-items: center;
+                justify-content: center;
+            }
+            .menuBtn{
+                display: none;
+                font-size: 35px;
+                color: black;
+                cursor: pointer;
+                position: absolute;
+                left: 80px;
+            }
+            .logo{
+                font-size: 50px;
+                text-align: center;
+                margin-left: 40px ;
+                margin-bottom: 0;
+                line-height: 1;
+            }
+            .nav{
+                margin: 100px
+            }
+            .nav a{
+                color:rgb(48, 46, 46);
+                text-decoration: none;
+                font-weight: 300;
+                font-size: 15px;
+            }
+            .dropdown {
+                float: left;
+                overflow: hidden;
+            }
+            .dropdown .dropbtn {
+                font-size: 16px;
+                border: none;
+                outline: none;
+                padding: 14px 16px;
+                background-color: inherit;
+                margin: 0;
+            }
+            .nav a:hover,.dropdown:hover .dropbtn {
+                color: red;
+            }
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+                border-radius: 20px;
+                border: 1px solid black;
+            }
+
+            .dropdown-content a {
+                float: none;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+                text-align: left;
+            }
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+            /* Header Responsive */
+            @media screen and (max-width: 1000px) {
+                header{
+                    width: 730px;
+                }
+                .menuBtn {display: block;}
+                .nav {
+                    display: none;
+                    flex-direction: column;
+                    position: absolute;
+                    top: 70px;
+                    margin-right: 590px;
+                    width: 150px;
+                    background-color: white;
+                    z-index: 1;
+                    border-radius: 20px;
+                    border: 1px solid black;
+                }
+                .dropdown-content {
+                    position: relative; 
+                    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+                    background-color: #f1f1f1;
+                    border: none;
+                    border-radius: 0;
+                    width: 100%;
+                    margin: 0 auto; 
+                }
+                .logo {margin-left: 0}
+            }
+            @media screen and (max-width: 780px){
+                header{
+                    width: 100%;
+                    border-radius: 0%;
+                }
+                .menuBtn {
+                    display: block;
+                    left: 30px;
+                }
+                .nav {
+                    display: none;
+                    flex-direction: column;
+                    position: absolute;
+                    top: -10px;
+                    margin-right: 650px;
+                    width: 150px;
+                    background-color: white;
+                    z-index: 1;
+                    border-radius: 20px;
+                    border: 1px solid black;
+                }
+                .dropdown-content {
+                    position: relative; 
+                    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+                    background-color: #f1f1f1;
+                    border: none;
+                    border-radius: 0;
+                    width: 100%;
+                    margin: 0 auto; 
+                }
+                .whole{padding-top: 0;}
+
+                .logo {margin-left: 0}
+            }
+            /* Body */
+            .cardinfo {
+                display: flex;
+                flex-direction: column;
+                width: 1150px;
+                height: 2000px;
+                background-color: rgb(238, 206, 236);
+                border: 1px solid black;
+                border-radius: 20px;
+                margin: 70px auto;
+                gap: 30px;
+                justify-content: center;
+                align-items: center;
+            }
+            .cardinfo1 {
+                display: flex;
+                flex-direction: row;
+                width: 1000px;
+                height: 400px;
+                justify-content: center;
+                align-items: center;
+                gap: 30px;
+            }
+            .cardinfo1_text{
+                display: flex;
+                flex-direction: column;
+                gap: 30px;
+            }
+            .firstImage {
+                height: 350px;
+                border-radius: 20px;
+                border: 1px solid black;
+            }
+            .box0 {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                width: 80px;
+                height: 25px;
+                border: 1px solid black;
+                background-color: white;
+                border-radius: 30px;
+                transition: transform 0.3s ease;
+                gap: 7px;
+            }
+            .sublime {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 370px;
+                height: 100px;
+                border: 1px solid black;
+                background-color: white;
+                border-radius: 10px;
+                text-align: left;
+            }
+            .sublime_text {
+                margin-left: 15px;
+                margin-right: 15px;
+                font-size: 25px;
+                color:rgb(48, 46, 46);
+            }
+            .author {
+                width: 400px;
+                display: flex;
+                flex-direction: row;
+                background-color: rgb(238, 206, 236);
+                gap: 10px;
+            }
+            .author_name {
+                text-align: center;
+                font-weight: 500;
+                font-size: 12px;
+                transition: transform 0.3s ease;
+            }
+            .last_update {
+                margin-left: 30px;
+            }
+            .secondImage {
+                width: 40px;
+                height: 40px;
+                border-radius: 90px;
+                border: 1px solid black;
+            }
+            .date_box{
+                display: flex;
+                align-items: center;
+                height: 10px;
+            }
+            .cardinfo2 {
+                display: flex;
+                flex-direction: column;
+                width: 1000px;
+                height: 400px;
+                justify-content: flex-start;
+            }
+            .cardinfo3 {
+                display: flex;
+                flex-direction: row;
+                gap: 20px;
+            }
+            .cardinfo3_image{
+                width: 250px;
+                height: 250px;
+                border-radius: 20px;
+                border: 1px solid black;
+            }
+            .cardinfo4 {
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                width: 1000px;
+                height: 500px;
+            }
+            .cardinfo4_image {
+                width: 500px;
+                height: 350px;
+                border: 1px solid black;
+                border-radius: 20px;
+            }
+            .next_up{
+                display: flex;
+                text-align: left;
+            }
+            .cardinfo5 {
+                display: flex;
+                width: 1000px;
+                height: 150px;
+                flex-direction: column;
+                text-align: left;
+            }
+            /* Footer */
+            .footer{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                height: 800px;
+                border: 1px solid black;
+                background-color: rgb(243, 242, 204);
+            }
+            @media screen and (max-width: 1000px) {
+                .footer {
+                    height: 500px;
+                }
+            }
+            @media screen and (max-width: 780px){
+                .footer {
+                    height: 350px;
+                }
+            }
+            .footer_part1{
+                display: flex;
+                flex-direction: row;
+                gap: 40px;
+                justify-content: center;
+                width: 100%;
+                height: 400px;
+            }
+            @media screen and (max-width: 1000px){
+                .footer_part1 {
+                    display: none;
+                }
+            }
+            .box6{
+                margin-top: 50px;
+                display: flex;
+                flex-direction: column;
+                text-align: left;
+                padding:0;
+                width: 300px;
+                height: 300px;
+            }
+            .text6 {
+                margin-bottom: 30px;
+                margin-top: 0;
+            }
+            
+            .box7{
+                margin-top: 50px;
+                display: flex;
+                flex-direction: column;
+                width: 300px;
+                height: 300px;
+                position: relative;
+            }
+            .subbox7 {
+                display: flex;
+                flex-direction: row;
+                gap: 15px;
+                align-items: center;
+            }
+            .textbox7 {
+                display: flex;
+                flex-direction: column;
+                text-align: left;
+            }
+
+            .textbox7:hover{
+                text-decoration: underline;
+            }
+            .thirdImage {
+                border-radius: 10px;
+                border:1px solid black;
+                width: 90px;
+                height: 70px;
+            }
+            .thirdImage:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            }
+            .box8{
+                margin-top: 50px;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                width: 300px;
+                height: 300px;
+                position: relative;
+            }
+            .subbox8 {
+                margin-top: 6px;
+                display: flex;
+                flex-direction: row;
+                gap: 10px;
+            }
+            .button_subbox8 {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                width: 90px;
+                height: 30px;
+                border: 1px solid black;
+                background-color: white;
+                border-radius: 30px;
+                gap: 7px;
+            }
+            .circle{
+                width: 10px;
+                height: 10px;
+                border: 1px solid black;
+                border-radius: 100px;
+                position: relative;
+                background-color: rgb(239, 158, 227);
+            }
+            .button_subbox8:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            }
+            .bigCircle {
+                width: 45px;
+                height: 45px;
+                border: 1px solid black;
+                border-radius: 50%;
+                position: relative;
+                background-color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .bigCircle:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            }
+            .box10{
+                margin-top: 50px;
+                display: flex;
+                flex-direction: column;
+                width: 300px;
+                height: 300px;
+                position: relative;
+            }
+            .subbox10 {
+                margin-top: 6px;
+                display: flex;
+                flex-direction: row;
+                gap: 10px;
+                align-items: center;
+            }
+            .instalogo {
+                height: 20px;
+                width: 20px;
+                position: absolute;
+                justify-content: center;
+                align-items: center;
+            }
+            hr {
+                border: none; 
+                height: 1px; 
+                width: 1380px;
+                background-color: black; 
+                margin: 10px 0;
+            }
+            @media screen and (max-width: 1000px){
+                hr {
+                    margin-top: 50px;
+                    width: 730px;
+                }
+            }
+            @media screen and (max-width: 780px){
+                hr {
+                    display: none;
+                }
+            }
+            .footer_part2 {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                height: 300px; 
+            }
+            .emailBox {
+                display: flex;
+                flex-direction: row;
+                width: 500px;
+                height: 70px;
+                background-color: white;
+                border-radius: 40px;
+                border: 1px solid black;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 10px;
+            }
+            .submitButton {
+                display: flex;
+                flex-direction: row;
+                width: 100px;
+                height: 50px;
+                background-color: rgb(235, 74, 100);
+                border-radius: 40px;
+                border: 1px solid black;
+                align-items: center;
+                justify-content: center;
+            }
+            .submitButton:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            }
+            .lastTextBox {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+                width: 370px;
+                margin-top: 30px;
+            }
+            .floatBox1, .floatBox2, .floatBox3 {
+                display: flex;
+                justify-content: center;
+                position: absolute;
+                border-radius: 30px;
+                border: 1px solid black;
+                width: 130px;
+                height: 40px;
+                background-color: white;
+                align-items: center;
+                top: -70px;
+            }
+            .floatBox_text{
+                font-size: 17px;
+            }
+            .Insta {
+                font-size: 18px;
+            }
+            .Subcribe{
+                font-size: 40px;
+            }
+        </style>
+        <script defer>
+            function toggleNav() {
+                const nav = document.querySelector('.nav');
+                nav.style.display = (nav.style.display === 'flex') ? 'none' : 'flex';
+            }
+        </script>
+    </head>
+    <body> 
+        <div style="background-color: rgb(25, 206, 206);" class="whole">
+        <div>
+        <!--Header and navigation bar-->
+        <header>
+            <div class="menuBtn" onclick="toggleNav()">☰</div>
+            <div class="logo">
+                <p style="color: black; font-family: 'Times New Roman', Times, serif;"><b>Groovy</b></p>
+            </div>
+            <nav class="nav">
+                <div class="dropdown">
+                    <button class="dropbtn" id="homeButton"><a href="home.html" onclick="toHome()">Home</a></li></button>
+                    <div class="dropdown-content">
+                        <a href="#">Link 1</a>
+                        <a href="#">Link 2</a>
+                        <a href="#">Link 3</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn"><a href="gallery.html" onclick="toHeaderStyles()">Header Styles</a></li></button>
+                    <div class="dropdown-content">
+                        <a href="#">Link 1</a>
+                        <a href="#">Link 2</a>
+                        <a href="#">Link 3</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn"><a href="contact.html" onclick="toPostFeatures()">Post Features</a></li></button>
+                    <div class="dropdown-content">
+                        <a href="#">Link 1</a>
+                        <a href="#">Link 2</a>
+                        <a href="#">Link 3</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn"><a href="about.html" onclick="toTag()">#Tag</a></li></button>
+                    <div class="dropdown-content">
+                        <a href="#">Link 1</a>
+                        <a href="#">Link 2</a>
+                        <a href="#">Link 3</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn"><a href="about.html" onclick="tofeatures()">Features</a></li></button>
+                    <div class="dropdown-content">
+                        <a href="#">Link 1</a>
+                        <a href="#">Link 2</a>
+                        <a href="#">Link 3</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn"><a href="about.html" onclick="toShop()">Shop</a></li></button>
+                    <div class="dropdown-content">
+                        <a href="#">Link 1</a>
+                        <a href="#">Link 2</a>
+                        <a href="#">Link 3</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn"><a href="about.html" onclick="toContact()">Contact</a></li></button>
+                    <div class="dropdown-content">
+                        <a href="#">Link 1</a>
+                        <a href="#">Link 2</a>
+                        <a href="#">Link 3</a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <!-- Body -->
+        <div class="cardinfo">
+            <div class="cardinfo1">
+                <img src="photos/pinklightbulb.jpeg" alt="light bulb" class="firstImage">
+                <div class="cardinfo1_text">
+                    <div class="box0">
+                        <div class="circle"></div>
+                        <a href="cardInfo.html" style="text-decoration: none; color: black"><p class="text0">Travel</p></a>
+                    </div>
+                    <div class="date_box">
+                        <p class="text2"><pre>September 26, 2019 <span class="red-dot" style="color: red"> &bull; </span> 1 min read</pre></p>
+                    </div>
+                    <div class="sublime">
+                        <p class="sublime_text"><b>The spectacle before us was indeed sublime</b></p>
+                    </div>
+                    <div class="author">
+                        <a href="author.html"><img src="photos/ManInYellowHoodie.jpeg" alt="Man in yellow hoodie" class="secondImage"></a>
+                        <p class="author_name" style="font-size: 13px;">Johnathan Doe <span class="last_update"><b>Last update:</b> December 13, 2023</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="cardinfo2">
+                <p>Welcome, it's great to have you here.</p>
+                <p>We know that first impressions are important, so we've populated your new site with 
+                    some initial <b>getting started</b> posts that will help you get familiar with everything in no time. 
+                    This is the first one!
+                </p>
+                <p><b>A few things you should know upfront:</b></p>
+                <p>1. Ghost is designed for ambitious, professional publishers who want to actively build a 
+                    business around their content. That's who it works best for.
+                </p>
+                <p>2. The entire platform can be modified and customised to suit your needs. It's very powerful 
+                    but does require some knowledge of code. Ghost is not necessarily a good platform for beginners 
+                    or people who just want a simple personal blog.
+                </p>
+                <p>3. For the best experience, we recommend downloading the <b>Ghost Desktop App</b> for your computer, 
+                    which is the best way to access your Ghost site on a desktop device.
+                </p>
+            </div>
+            <div class="cardinfo3">
+                <img src="photos/yellow_flower.jpg" alt="yellowFlower" class="cardinfo3_image">
+                <img src="photos/yellow_flower.jpg" alt="yellowFlower" class="cardinfo3_image">
+                <img src="photos/yellow_flower.jpg" alt="yellowFlower" class="cardinfo3_image">
+            </div>
+            <div class="cardinfo4">
+                <p>
+                    Ghost is made by an independent non-profit organisation called the Ghost Foundation. 
+                    We are 100% self funded by revenue from our <b>Ghost(Pro)</b> service, and every penny we make 
+                    is re-invested into funding further development of free, open source technology for 
+                    modern publishing.
+                </p>
+                <img src="photos/happy_girl.jpeg" alt="Happy Girl" class="cardinfo4_image">
+                <p>The version of Ghost you are looking at right now would not have been made possible without 
+                    generous contributions from the open source <b>community</b>.
+                </p>
+            </div>
+            <div class="cardinfo5">
+                <p style="font-size: 30px"><b>Next up, the editor</b></p>
+                <p>The main thing you'll want to read about next is probably: <b>the Ghost editor</b>. This is where the good stuff happens.</p>
+            </div>
+        </div>
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer_part1">
+                <div class="box6">
+                    <p style="font-size: 50px; color: black; font-family: 'Times New Roman', Times, serif;" class="text6"><b>Groovy</b></p>
+                    <p class="text6">A super modern theme following the latest trends with 
+                       premium Membership and fully compatible with <b>Ghost</b>.
+                    </p>
+                    <p class="text6">Check more themes like this on <b>estudiopatagon.com</b></p>
+                </div>
+    
+                <div class="box7">
+                    <div class="floatBox1" style="width: 150px;">
+                        <p class="floatBox_text"><b>Recent Posts</b></p>
+                    </div>
+                    <div class="subbox7">
+                        <img src="photos/pinklightbulb.jpeg" alt="light bulb" class="thirdImage">
+                        <div class="textbox7">
+                            <p style=" margin-bottom: 5px;"><b>The spectacle before us was indeed sublime</b></p>
+                            <p style=" font-size:12px; margin-top: 0;">September 26, 2019</p>
+                        </div>
+                    </div>
+                    <div class="subbox7">
+                        <img src="photos/pinklightbulb.jpeg" alt="light bulb" class="thirdImage">
+                        <div class="textbox7">
+                            <p style=" margin-bottom: 5px;"><b>The spectacle before us was indeed sublime</b></p>
+                            <p style=" font-size:12px; margin-top: 0;">September 26, 2019</p>
+                        </div>
+                    </div>
+                    <div class="subbox7">
+                        <img src="photos/pinklightbulb.jpeg" alt="light bulb" class="thirdImage">
+                        <div class="textbox7">
+                            <p style=" margin-bottom: 5px;"><b>The spectacle before us was indeed sublime</b></p>
+                            <p style=" font-size:12px; margin-top: 0;">September 26, 2019</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="box8">
+                    <div class="floatBox2">
+                        <p class="floatBox_text"><b>Tag Cloud</b></p>
+                    </div>
+                    <div class="subbox8">
+                        <div class="button_subbox8">
+                            <div class="circle"></div>
+                            <p class="text0">Travel</p>
+                        </div>
+                        <div class="button_subbox8">
+                            <div class="circle"></div>
+                            <p class="text0">Travel</p>
+                        </div>
+                    </div>
+                    <div class="subbox8">
+                        <div class="button_subbox8">
+                            <div class="circle"></div>
+                            <p class="text0">Travel</p>
+                        </div>
+                        <div class="button_subbox8">
+                            <div class="circle"></div>
+                            <p class="text0">Travel</p>
+                        </div>
+                    </div>
+                    <div class="subbox8">
+                        <div class="button_subbox8">
+                            <div class="circle"></div>
+                            <p class="text0">Travel</p>
+                        </div>
+                        <div class="button_subbox8">
+                            <div class="circle"></div>
+                            <p class="text0">Travel</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box10">
+                    <div class="floatBox3">
+                        <p class="floatBox_text"><b>Follow me!</b></p>
+                    </div>
+                    <div class="subbox10">
+                        <div class="bigCircle">
+                            <img src="https://www.instagram.com/static/images/ico/favicon-200.png/ab6eff595bb1.png" alt="Instagram Logo" class="instalogo">
+                        </div>
+                        <p class="Insta"><b>Instagram</b></p>
+                    </div>
+                    <div class="subbox10">
+                        <div class="bigCircle">
+                            <img src="https://www.instagram.com/static/images/ico/favicon-200.png/ab6eff595bb1.png" alt="Instagram Logo" class="instalogo">
+                        </div>
+                        <p class="Insta" ><b>Instagram</b></p>
+                    </div>
+                    <div class="subbox10">
+                        <div class="bigCircle">
+                            <img src="https://www.instagram.com/static/images/ico/favicon-200.png/ab6eff595bb1.png" alt="Instagram Logo" class="instalogo">
+                        </div>
+                        <p class="Insta" ><b>Instagram</b></p>
+                    </div>
+                    <div class="subbox10">
+                        <div class="bigCircle">
+                            <img src="https://www.instagram.com/static/images/ico/favicon-200.png/ab6eff595bb1.png" alt="Instagram Logo" class="instalogo">
+                        </div>
+                        <p class="Insta" ><b>Instagram</b></p>
+                    </div>
+                </div>
+            </div>
+
+            <!--Horizontal line--> <hr>
+            <div class="footer_part2">
+                <p class="Subcribe"><b>Subcribe to our Newsletter</b></p>
+                <div class="emailBox">
+                    <p>Enter your email address</p>
+                    <div class="submitButton">
+                        <p style="color: white; font-size: 15px;"><b>Submit</b></p>
+                    </div>
+                </div>
+                <div class="lastTextBox">
+                    <p>Subscribe to our email newsletter to get the <b>latest posts</b> delivered <b>right to your email</b>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>
