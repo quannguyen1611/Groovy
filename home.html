@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Groovy</title>
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-wd9SddxKHW6q5WO3KCL5HpI8vaMG6CAdJzokWzoZBAe+MMydMRe2xLU3ElI4tNqB" crossorigin="anonymous">
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+            body{
+                margin: 0;
+                font-family: 'Raleway', sans-serif;
+                color:rgb(48, 46, 46);
+                width: 100%;
+            }
+            .whole {
+                padding-top: 60px;
+            }
+            /* Header and Navigation Bar */
+            header{
+                display: flex;
+                padding: 20px;
+                background-color:white;
+                border-radius: 90px;
+                border: 1px solid black;
+                width: 1130px;
+                height: 100px;
+                margin: 0 auto;
+                align-items: center;
+                justify-content: center;
+            }
+            .menuBtn{
+                display: none;
+                font-size: 35px;
+                color: black;
+                cursor: pointer;
+                position: absolute;
+                left: 80px;
+            }
+            .logo{
+                font-size: 50px;
+                text-align: center;
+                margin-left: 40px ;
+                margin-bottom: 0;
+                line-height: 1;
+            }
+            .nav{
+                margin: 100px
+            }
+            .nav a{
+                color:rgb(48, 46, 46);
+                text-decoration: none;
+                font-weight: 300;
+                font-size: 15px;
+            }
+            .dropdown {
+                float: left;
+                overflow: hidden;
+            }
+            .dropdown .dropbtn {
+                font-size: 16px;
+                border: none;
+                outline: none;
+                padding: 14px 16px;
+                background-color: inherit;
+                margin: 0;
+            }
+            .nav a:hover,.dropdown:hover .dropbtn {
+                color: red;
+            }
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+                border-radius: 20px;
+                border: 1px solid black;
+            }
+
+            .dropdown-content a {
+                float: none;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+                text-align: left;
+            }
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+            /* Header Responsive */
+            @media screen and (max-width: 1000px) {
+                header{
+                    width: 730px;
+                }
+                .menuBtn {display: block;}
+                .nav {
+                    display: none;
+                    flex-direction: column;
+                    position: absolute;
+                    top: 70px;
+                    margin-right: 590px;
+                    width: 150px;
+                    background-color: white;
+                    z-index: 1;
+                    border-radius: 20px;
+                    border: 1px solid black;
+                }
+                .dropdown-content {
+                    position: relative; 
+                    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+                    background-color: #f1f1f1;
+                    border: none;
+                    border-radius: 0;
+                    width: 100%;
+                    margin: 0 auto; 
+                }
+                .logo {margin-left: 0}
+            }
+            @media screen and (max-width: 780px){
+                header{
+                    width: 100%;
+                    border-radius: 0%;
+                }
+                .menuBtn {
+                    display: block;
+                    left: 30px;
+                }
+                .nav {
+                    display: none;
+                    flex-direction: column;
+                    position: absolute;
+                    top: -10px;
+                    margin-right: 650px;
+                    width: 150px;
+                    background-color: white;
+                    z-index: 1;
+                    border-radius: 20px;
+                    border: 1px solid black;
+                }
+                .dropdown-content {
+                    position: relative; 
+                    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+                    background-color: #f1f1f1;
+                    border: none;
+                    border-radius: 0;
+                    width: 100%;
+                    margin: 0 auto; 
+                }
+                .whole{padding-top: 0;}
+
+                .logo {margin-left: 0}
+            }
+            /* Body */
+            .grid {
+                margin-top: 30px;
+                display: grid;
+                grid-template-columns: repeat(3, 350px); /*width*/
+                grid-template-rows: repeat(3, 650px); /*height*/
+                gap: 40px; 
+                justify-content: center;
+                margin-bottom: 150px;
+            }
+            @media screen and (max-width: 1000px){
+                .grid {
+                    grid-template-columns: repeat(2, 350px); /*width*/
+                    grid-template-rows: repeat(2, 650px); /*height*/
+                    gap: 30px;
+                }
+            }
+            @media screen and (max-width: 780px){
+                .grid {
+                    grid-template-columns: repeat(1, 670px); /*width*/
+                    grid-template-rows: repeat(1, 650px); /*height*/
+                }
+            }
+            .box {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100%;
+                border: 1px solid black;
+                background-color: rgb(238, 206, 236);
+                border-radius: 15px;
+                position: relative;
+                gap: 35px;
+                margin-top: 40px;
+            }
+            
+            .firstImage {
+                display: flex;
+                justify-content: center;
+                width: 300px;
+                height: 350px;
+                border: 1px solid black;
+                border-radius: 15px;
+                position: relative;
+                transition: transform 0.3s ease;
+            }
+            @media screen and (max-width: 780px){
+                .firstImage{
+                    width: 620px;
+                    height: 400px;
+                }
+            }
+            .box0 {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                width: 80px;
+                height: 25px;
+                border: 1px solid black;
+                background-color: white;
+                border-radius: 30px;
+                transition: transform 0.3s ease;
+                position: absolute;
+                margin-bottom: 530px;
+                margin-right: 190px;
+                gap: 7px;
+            }
+            @media screen and (max-width: 780px){
+                .box0 {
+                    width: 80px;
+                    margin-right: 500px;
+                }
+            }
+            .commentIcon{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 35px;
+                height: 35px;
+                background-color: rgb(48, 46, 46);
+                border-radius: 50%;
+                position: absolute;
+                margin-bottom: 530px;
+                margin-left: 230px;
+            }
+            .commentBox{
+                opacity: 0;
+                display: flex;
+                justify-content: center;
+                position: absolute;
+                
+            }
+            @media screen and (max-width: 780px){
+                .commentIcon {
+                    margin-left: 550px;
+                }
+            }
+            .commentIcon:hover + .commentBox{
+                opacity: 1;
+                display: flex;
+                align-items: center;
+                background-color: white;
+                border-radius: 20px;
+                border: 1px solid black;
+                width: 100px;
+                height: 30px;
+                margin-bottom: 610px;
+                margin-left: 230px;
+                position: absolute;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            }
+            @media screen and (max-width: 780px){
+                .commentIcon:hover + .commentBox {
+                    margin-left: 550px;
+                }
+            }
+            .text0 {
+                color:rgb(48, 46, 46);
+                font-weight: 100;
+                font-size: 14px;
+            }
+            .circle{
+                width: 10px;
+                height: 10px;
+                border: 1px solid black;
+                border-radius: 100px;
+                position: relative;
+                background-color: rgb(239, 158, 227);
+            }
+            
+            .box0:hover{
+                transform: translateY(-5px);
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            }
+            .box1 {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 270px;
+                height: 70px;
+                border: 1px solid black;
+                background-color: white;
+                border-radius: 10px;
+                transition: transform 0.3s ease;
+                position: absolute;
+                text-align: center;
+                margin-top: 10px;
+            }
+            .text1 {
+                margin-left: 10px;
+                margin-right: 10px;
+                font-size: 20px;
+                text-decoration:none;
+                color:rgb(48, 46, 46);
+            }
+            @media screen and (max-width: 780px){
+                .box1 {
+                    width: 580px;
+                    height: 35px;
+                    margin-top: 120px;
+                }
+                .text1 {
+                    font-size: 15px;
+                }
+            }
+            .box1:hover, .link1:hover ~ .box1 {
+                transform: translateY(-5px);
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            }
+
+            .box2 {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 5px;
+                background-color: rgb(238, 206, 236);
+                text-align: center;
+            }
+            .text2{
+                font-weight: 400;
+                font-size: 12px;
+            }
+            .box3 {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 230px;
+                height: 50px;
+                background-color: rgb(238, 206, 236);
+                transition: transform 0.3s ease;
+                text-align: center;
+            }
+            .text3{
+                display: flex;
+                font-weight: 300;
+            }
+            @media screen and (max-width: 780px){
+                .box3 {
+                    width: 600px;
+                }
+                .text3{
+                    font-size: 13px;
+                }
+            }
+            .box4 {
+                width: 180px;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                background-color: rgb(238, 206, 236);
+                gap: 10px;
+            }
+            .text4 {
+                text-align: center;
+                font-weight: 500;
+                font-size: 12px;
+                transition: transform 0.3s ease;
+            }
+            @media screen and (max-width: 780px){
+                .box4 {
+                    display: none;
+                }
+            }
+            .box5 {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                width: 180px;
+                height: 35px;
+                border: 1px solid black;
+                background-color: white;
+                border-radius: 30px;
+                margin-top: 10px;
+            }
+            .text5{
+                font-weight: 300;
+                color:rgb(48, 46, 46);
+            }
+            .secondImage {
+                width: 40px;
+                height: 40px;
+                border-radius: 90px;
+                border: 1px solid black;
+            }
+            .secondImage:hover{
+                transform: translateY(-5px);
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            }
+            .box5:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            }
+            #homeButton::before {
+                content: '\2022'; /* Unicode character for a dot */
+                color: red; 
+                margin-right: 5px; 
+            }
+            /* Footer */
+            .footer{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                height: 800px;
+                border: 1px solid black;
+                background-color: rgb(243, 242, 204);
+            }
+            @media screen and (max-width: 1000px) {
+                .footer {
+                    height: 500px;
+                }
+            }
+            @media screen and (max-width: 780px){
+                .footer {
+                    height: 350px;
+                }
+            }
+            .footer_part1{
+                display: flex;
+                flex-direction: row;
+                gap: 40px;
+                justify-content: center;
+                width: 100%;
+                height: 400px;
+            }
+            @media screen and (max-width: 1000px){
+                .footer_part1 {
+                    display: none;
+                }
+            }
+            .box6{
+                margin-top: 50px;
+                display: flex;
+                flex-direction: column;
+                text-align: left;
+                padding:0;
+                width: 300px;
+                height: 300px;
+            }
+            .text6 {
+                margin-bottom: 30px;
+                margin-top: 0;
+            }
+            
+            .box7{
+                margin-top: 50px;
+                display: flex;
+                flex-direction: column;
+                width: 300px;
+                height: 300px;
+                position: relative;
+            }
+            .subbox7 {
+                display: flex;
+                flex-direction: row;
+                gap: 15px;
+                align-items: center;
+            }
+            .textbox7 {
+                display: flex;
+                flex-direction: column;
+                text-align: left;
+            }
+
+            .textbox7:hover{
+                text-decoration: underline;
+            }
+            .thirdImage {
+                border-radius: 10px;
+                border:1px solid black;
+                width: 90px;
+                height: 70px;
+            }
+            .thirdImage:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            }
+            .box8{
+                margin-top: 50px;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                width: 300px;
+                height: 300px;
+                position: relative;
+            }
+            .subbox8 {
+                margin-top: 6px;
+                display: flex;
+                flex-direction: row;
+                gap: 10px;
+            }
+            .button_subbox8 {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                width: 90px;
+                height: 30px;
+                border: 1px solid black;
+                background-color: white;
+                border-radius: 30px;
+                gap: 7px;
+            }
+            .button_subbox8:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            }
+            .bigCircle {
+                width: 45px;
+                height: 45px;
+                border: 1px solid black;
+                border-radius: 50%;
+                position: relative;
+                background-color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .bigCircle:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            }
+            .box10{
+                margin-top: 50px;
+                display: flex;
+                flex-direction: column;
+                width: 300px;
+                height: 300px;
+                position: relative;
+            }
+            .subbox10 {
+                margin-top: 6px;
+                display: flex;
+                flex-direction: row;
+                gap: 10px;
+                align-items: center;
+            }
+            .instalogo {
+                height: 20px;
+                width: 20px;
+                position: absolute;
+                justify-content: center;
+                align-items: center;
+            }
+            hr {
+                border: none; 
+                height: 1px; 
+                width: 1380px;
+                background-color: black; 
+                margin: 10px 0;
+            }
+            @media screen and (max-width: 1000px){
+                hr {
+                    margin-top: 50px;
+                    width: 730px;
+                }
+            }
+            @media screen and (max-width: 780px){
+                hr {
+                    display: none;
+                }
+            }
+            .footer_part2 {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                height: 300px; 
+                  
+            }
+            .emailBox {
+                display: flex;
+                flex-direction: row;
+                width: 500px;
+                height: 70px;
+                background-color: white;
+                border-radius: 40px;
+                border: 1px solid black;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 10px;
+            }
+            .submitButton {
+                display: flex;
+                flex-direction: row;
+                width: 100px;
+                height: 50px;
+                background-color: rgb(235, 74, 100);
+                border-radius: 40px;
+                border: 1px solid black;
+                align-items: center;
+                justify-content: center;
+            }
+            .submitButton:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            }
+            .lastTextBox {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+                width: 370px;
+                margin-top: 30px;
+            }
+            .floatBox1, .floatBox2, .floatBox3 {
+                display: flex;
+                justify-content: center;
+                position: absolute;
+                border-radius: 30px;
+                border: 1px solid black;
+                width: 130px;
+                height: 40px;
+                background-color: white;
+                align-items: center;
+                top: -70px;
+            }
+            .floatBox_text{
+                font-size: 17px;
+            }
+            .Insta {
+                font-size: 18px;
+            }
+            .Subcribe{
+                font-size: 40px;
+            }
+        </style>
+        <script defer>
+            function toggleNav() {
+                const nav = document.querySelector('.nav');
+                nav.style.display = (nav.style.display === 'flex') ? 'none' : 'flex';
+            }
+        </script>
+    </head>
+    <body> 
+        <div style="background-color: rgb(25, 206, 206);" class="whole">
+        <div>
+        <!--Header and navigation bar-->
+        <header>
+            <div class="menuBtn" onclick="toggleNav()">☰</div>
+            <div class="logo">
+                <p style="color: black; font-family: 'Times New Roman', Times, serif;"><b>Groovy</b></p>
+            </div>
+            <nav class="nav">
+                <div class="dropdown">
+                    <button class="dropbtn" id="homeButton"><a href="home.html" onclick="toHome()">Home</a></li></button>
+                    <div class="dropdown-content">
+                        <a href="#">Link 1</a>
+                        <a href="#">Link 2</a>
+                        <a href="#">Link 3</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn"><a href="gallery.html" onclick="toHeaderStyles()">Header Styles</a></li></button>
+                    <div class="dropdown-content">
+                        <a href="#">Link 1</a>
+                        <a href="#">Link 2</a>
+                        <a href="#">Link 3</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn"><a href="contact.html" onclick="toPostFeatures()">Post Features</a></li></button>
+                    <div class="dropdown-content">
+                        <a href="#">Link 1</a>
+                        <a href="#">Link 2</a>
+                        <a href="#">Link 3</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn"><a href="about.html" onclick="toTag()">#Tag</a></li></button>
+                    <div class="dropdown-content">
+                        <a href="#">Link 1</a>
+                        <a href="#">Link 2</a>
+                        <a href="#">Link 3</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn"><a href="about.html" onclick="tofeatures()">Features</a></li></button>
+                    <div class="dropdown-content">
+                        <a href="#">Link 1</a>
+                        <a href="#">Link 2</a>
+                        <a href="#">Link 3</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn"><a href="about.html" onclick="toShop()">Shop</a></li></button>
+                    <div class="dropdown-content">
+                        <a href="#">Link 1</a>
+                        <a href="#">Link 2</a>
+                        <a href="#">Link 3</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn"><a href="about.html" onclick="toContact()">Contact</a></li></button>
+                    <div class="dropdown-content">
+                        <a href="#">Link 1</a>
+                        <a href="#">Link 2</a>
+                        <a href="#">Link 3</a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <!-- Body -->
+        <div class="grid">
+            <div class="box">
+                <a href="cardInfo.html" class="link1"><img src="photos/pinklightbulb.jpeg" alt="light bulb" class="firstImage"></a>
+                <div class="commentIcon">
+                    <p style="font-size: 12px;">&#128172;</p>
+                </div>
+                <div class="commentBox" style="font-size: 15px;">
+                    <p >3 comments</p>
+                </div>
+                <div class="box0">
+                    <div class="circle"></div>
+                    <a href="cardInfo.html" style="text-decoration: none; color: black"><p class="text0">Travel</p></a>
+                </div>
+                
+                <div class="box1">
+                    <a href="cardInfo.html" style="text-decoration: none;"><p class="text1"><b>The Spectacular before us was indeed sublime</b></p></a>
+                </div>
+                
+                <div class="box2">
+                    <p class="text2"><pre>September 26, 2019 <span class="red-dot" style="color: red"> &bull; </span> 1 min read</pre></p>
+                </div> 
+
+                <div class="box3">
+                    <p class="text3">Welcome, it's great to have you here. 
+                        We know that first impressions are important, so we've ...
+                    </p>
+                </div> 
+
+                <div>
+                    <div class="box4">
+                        <a href="author.html"><img src="photos/ManInYellowHoodie.jpeg" alt="Man in yellow hoodie" class="secondImage"></a>
+                        <p class="text4">Johnathan Doe</p>
+                    </div>
+                    <div class="box5">
+                        <a href="cardInfo.html" style="text-decoration: none;"><p class="text5"><b>Continue Reading</b></p></a>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <a href="cardInfo.html" class="link1"><img src="photos/pinklightbulb.jpeg" alt="light bulb" class="firstImage"></a>
+                <div class="commentIcon">
+                    <p style="font-size: 12px;">&#128172;</p>
+                </div>
+                <div class="commentBox" style="font-size: 15px;">
+                    <p >3 comments</p>
+                </div>
+                <div class="box0">
+                    <div class="circle"></div>
+                    <a href="cardInfo.html" style="text-decoration: none; "><p class="text0">Travel</p></a>
+                </div>
+                
+                <div class="box1">
+                    <a href="cardInfo.html" style="text-decoration: none;"><p class="text1"><b>The Spectacular before us was indeed sublime</b></p></a>
+                </div>
+                
+                <div class="box2">
+                    <p class="text2"><pre>September 26, 2019 <span class="red-dot" style="color: red"> &bull; </span> 1 min read</pre></p>
+                </div> 
+
+                <div class="box3">
+                    <p class="text3">Welcome, it's great to have you here. 
+                        We know that first impressions are important, so we've ...
+                    </p>
+                </div> 
+
+                <div>
+                    <div class="box4">
+                        <a href="author.html"><img src="photos/ManInYellowHoodie.jpeg" alt="Man in yellow hoodie" class="secondImage"></a>
+                        <p class="text4">Johnathan Doe</p>
+                    </div>
+                    <div class="box5">
+                        <a href="cardInfo.html" style="text-decoration: none; "><p class="text5"><b>Continue Reading</b></p></a>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <a href="cardInfo.html" class="link1"><img src="photos/pinklightbulb.jpeg" alt="light bulb" class="firstImage"></a>
+                <div class="commentIcon">
+                    <p style="font-size: 12px;">&#128172;</p>
+                </div>
+                <div class="commentBox" style="font-size: 15px;">
+                    <p >3 comments</p>
+                </div>
+                <div class="box0">
+                    <div class="circle"></div>
+                    <a href="cardInfo.html" style="text-decoration: none; "><p class="text0">Travel</p></a>
+                </div>
+                
+                <div class="box1">
+                    <a href="cardInfo.html" style="text-decoration: none;"><p class="text1"><b>The Spectacular before us was indeed sublime</b></p></a>
+                </div>
+                
+                <div class="box2">
+                    <p class="text2"><pre>September 26, 2019 <span class="red-dot" style="color: red"> &bull; </span> 1 min read</pre></p>
+                </div> 
+
+                <div class="box3">
+                    <p class="text3">Welcome, it's great to have you here. 
+                        We know that first impressions are important, so we've ...
+                    </p>
+                </div> 
+
+                <div>
+                    <div class="box4">
+                        <a href="author.html"><img src="photos/ManInYellowHoodie.jpeg" alt="Man in yellow hoodie" class="secondImage"></a>
+                        <p class="text4">Johnathan Doe</p>
+                    </div>
+                    <div class="box5">
+                        <a href="cardInfo.html" style="text-decoration: none; color: black"><p class="text5"><b>Continue Reading</b></p></a>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <a href="cardInfo.html" class="link1"><img src="photos/pinklightbulb.jpeg" alt="light bulb" class="firstImage"></a>
+                <div class="commentIcon">
+                    <p style="font-size: 12px;">&#128172;</p>
+                </div>
+                <div class="commentBox" style="font-size: 15px;">
+                    <p >3 comments</p>
+                </div>
+                <div class="box0">
+                    <div class="circle"></div>
+                    <a href="cardInfo.html" style="text-decoration: none; "><p class="text0">Travel</p></a>
+                </div>
+                
+                <div class="box1">
+                    <a href="cardInfo.html" style="text-decoration: none;"><p class="text1"><b>The Spectacular before us was indeed sublime</b></p></a>
+                </div>
+                
+                <div class="box2">
+                    <p class="text2"><pre>September 26, 2019 <span class="red-dot" style="color: red"> &bull; </span> 1 min read</pre></p>
+                </div> 
+
+                <div class="box3">
+                    <p class="text3">Welcome, it's great to have you here. 
+                        We know that first impressions are important, so we've ...
+                    </p>
+                </div> 
+
+                <div>
+                    <div class="box4">
+                        <a href="author.html"><img src="photos/ManInYellowHoodie.jpeg" alt="Man in yellow hoodie" class="secondImage"></a>
+                        <p class="text4">Johnathan Doe</p>
+                    </div>
+                    <div class="box5">
+                        <a href="cardInfo.html" style="text-decoration: none; "><p class="text5"><b>Continue Reading</b></p></a>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <a href="cardInfo.html" class="link1"><img src="photos/pinklightbulb.jpeg" alt="light bulb" class="firstImage"></a>
+                <div class="commentIcon">
+                    <p style="font-size: 12px;">&#128172;</p>
+                </div>
+                <div class="commentBox" style="font-size: 15px;">
+                    <p >3 comments</p>
+                </div>
+                <div class="box0">
+                    <div class="circle"></div>
+                    <a href="cardInfo.html" style="text-decoration: none; "><p class="text0">Travel</p></a>
+                </div>
+                
+                <div class="box1">
+                    <a href="cardInfo.html" style="text-decoration: none;"><p class="text1"><b>The Spectacular before us was indeed sublime</b></p></a>
+                </div>
+                
+                <div class="box2">
+                    <p class="text2"><pre>September 26, 2019 <span class="red-dot" style="color: red"> &bull; </span> 1 min read</pre></p>
+                </div> 
+
+                <div class="box3">
+                    <p class="text3">Welcome, it's great to have you here. 
+                        We know that first impressions are important, so we've ...
+                    </p>
+                </div> 
+
+                <div>
+                    <div class="box4">
+                        <a href="author.html"><img src="photos/ManInYellowHoodie.jpeg" alt="Man in yellow hoodie" class="secondImage"></a>
+                        <p class="text4">Johnathan Doe</p>
+                    </div>
+                    <div class="box5">
+                        <a href="cardInfo.html" style="text-decoration: none; "><p class="text5"><b>Continue Reading</b></p></a>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <a href="cardInfo.html" class="link1"><img src="photos/pinklightbulb.jpeg" alt="light bulb" class="firstImage"></a>
+                <div class="commentIcon">
+                    <p style="font-size: 12px;">&#128172;</p>
+                </div>
+                <div class="commentBox" style="font-size: 15px;">
+                    <p >3 comments</p>
+                </div>
+                <div class="box0">
+                    <div class="circle"></div>
+                    <a href="cardInfo.html" style="text-decoration: none; "><p class="text0">Travel</p></a>
+                </div>
+                
+                <div class="box1">
+                    <a href="cardInfo.html" style="text-decoration: none;"><p class="text1"><b>The Spectacular before us was indeed sublime</b></p></a>
+                </div>
+                
+                <div class="box2">
+                    <p class="text2"><pre>September 26, 2019 <span class="red-dot" style="color: red"> &bull; </span> 1 min read</pre></p>
+                </div> 
+
+                <div class="box3">
+                    <p class="text3">Welcome, it's great to have you here. 
+                        We know that first impressions are important, so we've ...
+                    </p>
+                </div> 
+
+                <div>
+                    <div class="box4">
+                        <a href="author.html"><img src="photos/ManInYellowHoodie.jpeg" alt="Man in yellow hoodie" class="secondImage"></a>
+                        <p class="text4">Johnathan Doe</p>
+                    </div>
+                    <div class="box5">
+                        <a href="cardInfo.html" style="text-decoration: none; "><p class="text5"><b>Continue Reading</b></p></a>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <a href="cardInfo.html" class="link1"><img src="photos/pinklightbulb.jpeg" alt="light bulb" class="firstImage"></a>
+                <div class="commentIcon">
+                    <p style="font-size: 12px;">&#128172;</p>
+                </div>
+                <div class="commentBox" style="font-size: 15px;">
+                    <p>3 comments</p>
+                </div>
+                <div class="box0">
+                    <div class="circle"></div>
+                    <a href="cardInfo.html" style="text-decoration: none; "><p class="text0">Travel</p></a>
+                </div>
+                
+                <div class="box1">
+                    <a href="cardInfo.html" style="text-decoration: none;"><p class="text1"><b>The Spectacular before us was indeed sublime</b></p></a>
+                </div>
+                
+                <div class="box2">
+                    <p class="text2"><pre>September 26, 2019 <span class="red-dot" style="color: red"> &bull; </span> 1 min read</pre></p>
+                </div> 
+
+                <div class="box3">
+                    <p class="text3">Welcome, it's great to have you here. 
+                        We know that first impressions are important, so we've ...
+                    </p>
+                </div> 
+
+                <div>
+                    <div class="box4">
+                        <a href="author.html"><img src="photos/ManInYellowHoodie.jpeg" alt="Man in yellow hoodie" class="secondImage"></a>
+                        <p class="text4">Johnathan Doe</p>
+                    </div>
+                    <div class="box5">
+                        <a href="cardInfo.html" style="text-decoration: none; "><p class="text5"><b>Continue Reading</b></p></a>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <a href="cardInfo.html" class="link1"><img src="photos/pinklightbulb.jpeg" alt="light bulb" class="firstImage"></a>
+                <div class="commentIcon">
+                    <p style="font-size: 12px;">&#128172;</p>
+                </div>
+                <div class="commentBox" style="font-size: 15px;">
+                    <p >3 comments</p>
+                </div>
+                <div class="box0">
+                    <div class="circle"></div>
+                    <a href="cardInfo.html" style="text-decoration: none; "><p class="text0">Travel</p></a>
+                </div>
+                
+                <div class="box1">
+                    <a href="cardInfo.html" style="text-decoration: none;"><p class="text1"><b>The Spectacular before us was indeed sublime</b></p></a>
+                </div>
+                
+                <div class="box2">
+                    <p class="text2"><pre>September 26, 2019 <span class="red-dot" style="color: red"> &bull; </span> 1 min read</pre></p>
+                </div> 
+
+                <div class="box3">
+                    <p class="text3">Welcome, it's great to have you here. 
+                        We know that first impressions are important, so we've ...
+                    </p>
+                </div> 
+
+                <div>
+                    <div class="box4">
+                        <a href="author.html"><img src="photos/ManInYellowHoodie.jpeg" alt="Man in yellow hoodie" class="secondImage"></a>
+                        <p class="text4">Johnathan Doe</p>
+                    </div>
+                    <div class="box5">
+                        <a href="cardInfo.html" style="text-decoration: none; "><p class="text5"><b>Continue Reading</b></p></a>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <a href="cardInfo.html" class="link1"><img src="photos/pinklightbulb.jpeg" alt="light bulb" class="firstImage"></a>
+                <div class="commentIcon">
+                    <p style="font-size: 12px;">&#128172;</p>
+                </div>
+                <div class="commentBox" style="font-size: 15px;">
+                    <p >3 comments</p>
+                </div>
+                <div class="box0">
+                    <div class="circle"></div>
+                    <a href="cardInfo.html" style="text-decoration: none; "><p class="text0">Travel</p></a>
+                </div>
+                
+                <div class="box1">
+                    <a href="cardInfo.html" style="text-decoration: none;"><p class="text1"><b>The Spectacular before us was indeed sublime</b></p></a>
+                </div>
+                
+                <div class="box2">
+                    <p class="text2"><pre>September 26, 2019 <span class="red-dot" style="color: red"> &bull; </span> 1 min read</pre></p>
+                </div> 
+
+                <div class="box3">
+                    <p class="text3">Welcome, it's great to have you here. 
+                        We know that first impressions are important, so we've ...
+                    </p>
+                </div> 
+
+                <div>
+                    <div class="box4">
+                        <a href="author.html"><img src="photos/ManInYellowHoodie.jpeg" alt="Man in yellow hoodie" class="secondImage"></a>
+                        <p class="text4">Johnathan Doe</p>
+                    </div>
+                    <div class="box5">
+                        <a href="cardInfo.html" style="text-decoration: none; "><p class="text5"><b>Continue Reading</b></p></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer_part1">
+                <div class="box6">
+                    <p style="font-size: 50px; color: black; font-family: 'Times New Roman', Times, serif;" class="text6"><b>Groovy</b></p>
+                    <p class="text6">A super modern theme following the latest trends with 
+                       premium Membership and fully compatible with <b>Ghost</b>.
+                    </p>
+                    <p class="text6">Check more themes like this on <b>estudiopatagon.com</b></p>
+                </div>
+    
+                <div class="box7">
+                    <div class="floatBox1" style="width: 150px;">
+                        <p class="floatBox_text"><b>Recent Posts</b></p>
+                    </div>
+                    <div class="subbox7">
+                        <img src="photos/pinklightbulb.jpeg" alt="light bulb" class="thirdImage">
+                        <div class="textbox7">
+                            <p style=" margin-bottom: 5px;"><b>The spectacle before us was indeed sublime</b></p>
+                            <p style=" font-size:12px; margin-top: 0;">September 26, 2019</p>
+                        </div>
+                    </div>
+                    <div class="subbox7">
+                        <img src="photos/pinklightbulb.jpeg" alt="light bulb" class="thirdImage">
+                        <div class="textbox7">
+                            <p style=" margin-bottom: 5px;"><b>The spectacle before us was indeed sublime</b></p>
+                            <p style=" font-size:12px; margin-top: 0;">September 26, 2019</p>
+                        </div>
+                    </div>
+                    <div class="subbox7">
+                        <img src="photos/pinklightbulb.jpeg" alt="light bulb" class="thirdImage">
+                        <div class="textbox7">
+                            <p style=" margin-bottom: 5px;"><b>The spectacle before us was indeed sublime</b></p>
+                            <p style=" font-size:12px; margin-top: 0;">September 26, 2019</p>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="box8">
+                    <div class="floatBox2">
+                        <p class="floatBox_text"><b>Tag Cloud</b></p>
+                    </div>
+                    <div class="subbox8">
+                        <div class="button_subbox8">
+                            <div class="circle"></div>
+                            <p class="text0">Travel</p>
+                        </div>
+                        <div class="button_subbox8">
+                            <div class="circle"></div>
+                            <p class="text0">Travel</p>
+                        </div>
+                    </div>
+                    <div class="subbox8">
+                        <div class="button_subbox8">
+                            <div class="circle"></div>
+                            <p class="text0">Travel</p>
+                        </div>
+                        <div class="button_subbox8">
+                            <div class="circle"></div>
+                            <p class="text0">Travel</p>
+                        </div>
+                    </div>
+                    <div class="subbox8">
+                        <div class="button_subbox8">
+                            <div class="circle"></div>
+                            <p class="text0">Travel</p>
+                        </div>
+                        <div class="button_subbox8">
+                            <div class="circle"></div>
+                            <p class="text0">Travel</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box10">
+                    <div class="floatBox3">
+                        <p class="floatBox_text"><b>Follow me!</b></p>
+                    </div>
+                    <div class="subbox10">
+                        <div class="bigCircle">
+                            <img src="https://www.instagram.com/static/images/ico/favicon-200.png/ab6eff595bb1.png" alt="Instagram Logo" class="instalogo">
+                        </div>
+                        <p class="Insta"><b>Instagram</b></p>
+                    </div>
+                    <div class="subbox10">
+                        <div class="bigCircle">
+                            <img src="https://www.instagram.com/static/images/ico/favicon-200.png/ab6eff595bb1.png" alt="Instagram Logo" class="instalogo">
+                        </div>
+                        <p class="Insta"><b>Instagram</b></p>
+                    </div>
+                    <div class="subbox10">
+                        <div class="bigCircle">
+                            <img src="https://www.instagram.com/static/images/ico/favicon-200.png/ab6eff595bb1.png" alt="Instagram Logo" class="instalogo">
+                        </div>
+                        <p class="Insta" ><b>Instagram</b></p>
+                    </div>
+                    <div class="subbox10">
+                        <div class="bigCircle">
+                            <img src="https://www.instagram.com/static/images/ico/favicon-200.png/ab6eff595bb1.png" alt="Instagram Logo" class="instalogo">
+                        </div>
+                        <p class="Insta" ><b>Instagram</b></p>
+                    </div>
+                </div>
+            </div>
+
+            <!--Horizontal line--> <hr>
+            <div class="footer_part2">
+                <p class="Subcribe"><b>Subcribe to our Newsletter</b></p>
+                <div class="emailBox">
+                    <p>Enter your email address</p>
+                    <div class="submitButton">
+                        <p style="color: white; font-size: 15px;"><b>Submit</b></p>
+                    </div>
+                </div>
+                <div class="lastTextBox">
+                    <p>Subscribe to our email newsletter to get the <b>latest posts</b> delivered <b>right to your email</b>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>
